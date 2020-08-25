@@ -138,7 +138,6 @@ async fn run_wormhole(config: Config, introspect: IntrospectionAddrs, mut restar
 
 async fn connect_to_wormhole(config: &Config) -> Result<WebSocketStream<MaybeTlsStream<TcpStream>>, Error> {
     let spinner = if config.first_run {
-        eprintln!("{}\n\n", format!("{}", include_str!("../static/img/wormhole_ascii.txt")).green());
         Some(spinner::new_spinner("initializing remote tunnel, please stand by"))
     } else {
         None
@@ -189,6 +188,8 @@ async fn connect_to_wormhole(config: &Config) -> Result<WebSocketStream<MaybeTls
         if let Some(pb) = spinner {
             pb.finish_with_message(&format!("Success! Remote tunnel created on: {}", &config.activation_url(&sub_domain).bold().green()));
         }
+        
+        eprintln!("Success! Remote tunnel created on: {}", &config.activation_url(&sub_domain))
 
         if config.sub_domain.is_some() && (config.sub_domain.as_ref() != Some(&sub_domain)) {
             eprintln!("{}",
