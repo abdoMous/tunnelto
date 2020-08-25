@@ -189,7 +189,7 @@ async fn connect_to_wormhole(config: &Config) -> Result<WebSocketStream<MaybeTls
             pb.finish_with_message(&format!("Success! Remote tunnel created on: {}", &config.activation_url(&sub_domain).bold().green()));
         }
         
-        eprintln!("Success! Remote tunnel created on: {}", &config.activation_url(&sub_domain))
+        eprintln!("Success! Remote tunnel created on: {}", &config.activation_url(&sub_domain));
 
         if config.sub_domain.is_some() && (config.sub_domain.as_ref() != Some(&sub_domain)) {
             eprintln!("{}",
